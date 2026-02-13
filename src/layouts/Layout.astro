@@ -8,7 +8,7 @@ interface Props {
 
 const {
   title = 'Seenit! - TV Series Episode Tracker | Chrome & Firefox Extension',
-  description = 'Track your favorite TV series effortlessly with Seenit! Free browser extension for Chrome and Firefox. Never lose track of watched episodes again. Mark episodes as seen, organize your shows, and pick up right where you left off.',
+  description = 'Track your favorite TV series effortlessly with Seenit! Free Chrome and Firefox extension to mark episodes as seen and never lose your progress.',
   image = '/og-image.png',
   canonicalURL = Astro.url.href,
 } = Astro.props;
@@ -524,6 +524,109 @@ const fullImageURL = new URL(image, siteURL).href;
 
     .preview__image {
       border-radius: 12px;
+    }
+  }
+
+  /* Features Block */
+  .features {
+    padding: 4rem 2rem;
+    background-color: var(--bg-secondary);
+  }
+
+  .features__title {
+    font-family: 'Poppins', system-ui, sans-serif;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    background: linear-gradient(90deg, var(--gradient-blue), var(--gradient-purple), var(--gradient-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .features__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .feature {
+    background-color: var(--bg-primary);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .feature:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  }
+
+  .feature__title {
+    font-family: 'Poppins', system-ui, sans-serif;
+    font-size: 1.3rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+  }
+
+  .feature__description {
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  /* How It Works Block */
+  .how-it-works {
+    padding: 4rem 2rem;
+    background-color: var(--bg-primary);
+    text-align: center;
+  }
+
+  .how-it-works__title {
+    font-family: 'Poppins', system-ui, sans-serif;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(90deg, var(--gradient-blue), var(--gradient-purple), var(--gradient-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .how-it-works__description {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    line-height: 1.8;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 768px) {
+    .features__title,
+    .how-it-works__title {
+      font-size: 2rem;
+    }
+
+    .features {
+      padding: 3rem 1.5rem;
+    }
+
+    .how-it-works {
+      padding: 3rem 1.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .features__title,
+    .how-it-works__title {
+      font-size: 1.75rem;
+    }
+
+    .feature {
+      padding: 1.5rem;
     }
   }
 </style>

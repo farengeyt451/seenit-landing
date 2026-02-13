@@ -1,0 +1,39 @@
+---
+import MoonIcon from './icons/MoonIcon.astro';
+import SunIcon from './icons/SunIcon.astro';
+---
+
+<button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+  <span class="theme-toggle__moon">
+    <MoonIcon />
+  </span>
+  <span class="theme-toggle__sun">
+    <SunIcon />
+  </span>
+</button>
+
+<style>
+  .theme-toggle__sun {
+    display: none;
+  }
+  :global(body.light-theme) .theme-toggle__moon {
+    display: none;
+  }
+  :global(body.light-theme) .theme-toggle__sun {
+    display: block;
+  }
+</style>
+
+<script>
+  const toggle = document.getElementById('theme-toggle');
+  const body = document.body;
+  
+  // Set initial theme to dark
+  body.classList.add('dark-theme');
+
+  toggle?.addEventListener('click', () => {
+    const isDark = body.classList.contains('dark-theme');
+    body.classList.remove(isDark ? 'dark-theme' : 'light-theme');
+    body.classList.add(isDark ? 'light-theme' : 'dark-theme');
+  });
+</script>

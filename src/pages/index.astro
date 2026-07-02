@@ -2,8 +2,6 @@
 import Layout from '../layouts/Layout.astro';
 import GitHubIcon from '../components/icons/GitHubIcon.astro';
 import ThemeToggle from '../components/ThemeToggle.astro';
-import { Image } from 'astro:assets';
-import heroImage from '../assets/hero.png';
 
 const currentYear = new Date().getFullYear();
 
@@ -106,7 +104,24 @@ const steps = [
 
       <div class="preview">
         <div class="preview__container">
-          <Image src={heroImage} alt="Seenit! extension preview" class="preview__image" loading="eager" />
+          <div class="preview__stage">
+            <img
+              src="/light.png"
+              alt="Seenit! extension in light mode"
+              class="preview__popup preview__popup--light"
+              width="479"
+              height="600"
+              loading="eager"
+            />
+            <img
+              src="/dark.png"
+              alt="Seenit! extension in dark mode"
+              class="preview__popup preview__popup--dark"
+              width="479"
+              height="600"
+              loading="eager"
+            />
+          </div>
         </div>
       </div>
 

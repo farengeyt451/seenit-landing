@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import GitHubIcon from '../components/icons/GitHubIcon.astro';
+import LinkedInIcon from '../components/icons/LinkedInIcon.astro';
 import ThemeToggle from '../components/ThemeToggle.astro';
 
 const currentYear = new Date().getFullYear();
@@ -9,6 +10,7 @@ const CHROME_URL =
   'https://chromewebstore.google.com/detail/seenit-episode-tracker/amopmnmnaimidbcfnjbnlfagmlmdhlch';
 const FIREFOX_URL = 'https://addons.mozilla.org/ru/firefox/addon/seenit-episode-tracker/';
 const GITHUB_URL = 'https://github.com/farengeyt451/seenit-episode-tracker';
+const LINKEDIN_URL = 'https://www.linkedin.com/in/alexander-kislov/';
 
 const features = [
   {
@@ -97,6 +99,15 @@ const syncPoints = [
           aria-label="GitHub"
         >
           <GitHubIcon />
+        </a>
+        <a
+          href={LINKEDIN_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="header__link"
+          aria-label="LinkedIn"
+        >
+          <LinkedInIcon />
         </a>
         <ThemeToggle />
       </div>

@@ -6,17 +6,74 @@ import { Image } from 'astro:assets';
 import heroImage from '../assets/hero.png';
 
 const currentYear = new Date().getFullYear();
+
+const CHROME_URL =
+  'https://chromewebstore.google.com/detail/seenit-episode-tracker/amopmnmnaimidbcfnjbnlfagmlmdhlch';
+const FIREFOX_URL = 'https://addons.mozilla.org/ru/firefox/addon/seenit-episode-tracker/';
+const GITHUB_URL = 'https://github.com/farengeyt451/seenit-episode-tracker';
+
+const features = [
+  {
+    title: 'Track every episode',
+    description:
+      'One click marks an episode watched. Per-season progress bars remember exactly where you left off across every show.',
+  },
+  {
+    title: 'Rich series overview',
+    description:
+      'See the poster, rating, genres and a live air-status badge that keeps pinging while a show is still running.',
+  },
+  {
+    title: 'Find & organize',
+    description:
+      'Search to add any show, then filter, sort, favorite and drag to reorder your list exactly how you like it.',
+  },
+  {
+    title: 'Cloud sync, optional',
+    description:
+      'Connect Google Drive on Chrome to back up and sync progress across devices. Conflict-free merging keeps everything in step.',
+  },
+  {
+    title: 'Private & local-first',
+    description:
+      'Your data lives in your browser by default. No account, no ads, no tracking - and you can export or import it anytime.',
+  },
+  {
+    title: 'Dark & light themes',
+    description:
+      'A clean, fast interface that looks great day or night, kept up to date on both Chrome and Firefox.',
+  },
+];
+
+const steps = [
+  {
+    number: '1',
+    title: 'Install & pin',
+    description: 'Add Seenit! to Chrome or Firefox and pin the icon to your toolbar.',
+  },
+  {
+    number: '2',
+    title: 'Add your shows',
+    description: 'Search by title and add the series you are watching. Metadata is powered by TheTVDB.',
+  },
+  {
+    number: '3',
+    title: 'Mark as you watch',
+    description: 'Tap episodes as you finish them. Progress saves automatically - and syncs, if you want it to.',
+  },
+];
 ---
 
 <Layout>
   <div class="page">
     <header class="header">
-      <div class="logo">
+      <a href="/" class="logo" aria-label="Seenit! home">
+        <img src="/icon-128.png" alt="Seenit! logo" class="logo__mark" width="32" height="32" />
         <span class="logo__text">Seenit!</span>
-      </div>
+      </a>
       <div class="header__actions">
         <a
-          href="https://github.com/farengeyt451/seenit-episode-tracker"
+          href={GITHUB_URL}
           target="_blank"
           rel="noopener noreferrer"
           class="header__link"
@@ -30,105 +87,197 @@ const currentYear = new Date().getFullYear();
 
     <main class="main">
       <section class="hero">
-        <h1 class="hero__title">Your personal series companion</h1>
+        <span class="hero__badge">Free browser extension · Chrome &amp; Firefox</span>
+        <h1 class="hero__title">Your shows, perfectly tracked</h1>
         <p class="hero__description">
-          Mark what you've watched, pick up where you left off. Free browser extension for Chrome and Firefox.
+          Mark what you've watched, see every series at a glance, and pick up right where you left off.
+          A private, local-first episode tracker that lives in your browser.
         </p>
         <div class="hero__wrapper">
-          <a
-            href="https://chromewebstore.google.com/detail/seenit-episode-tracker/amopmnmnaimidbcfnjbnlfagmlmdhlch"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="button button--primary"
+          <a href={CHROME_URL} target="_blank" rel="noopener noreferrer" class="button button--primary"
             >Add to Chrome</a
           >
-          <a
-            href="https://addons.mozilla.org/ru/firefox/addon/seenit-episode-tracker/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="button button--primary"
+          <a href={FIREFOX_URL} target="_blank" rel="noopener noreferrer" class="button button--secondary"
             >Add to Firefox</a
           >
         </div>
+        <p class="hero__note">No account · No ads · No tracking</p>
       </section>
 
       <div class="preview">
         <div class="preview__container">
-          <Image
-            src={heroImage}
-            alt="Seenit! Extension Preview"
-            class="preview__image"
-            loading="eager"
-          />
+          <Image src={heroImage} alt="Seenit! extension preview" class="preview__image" loading="eager" />
         </div>
       </div>
 
-      <section class="features">
-        <h2 class="features__title">Why Choose Seenit?</h2>
+      <section class="features" id="features">
+        <h2 class="features__title">Everything you need to keep up</h2>
         <div class="features__grid">
-          <div class="feature">
-            <h3 class="feature__title">Track Episodes Easily</h3>
-            <p class="feature__description">
-              Click to mark an episode as watched. Seenit saves your progress for each show, so you can pick up right
-              where you left off.
-            </p>
-          </div>
-          <div class="feature">
-            <h3 class="feature__title">Works Offline</h3>
-            <p class="feature__description">
-              All data stays in your browser. Nothing is sent to external servers - your watch history is private and
-              always available.
-            </p>
-          </div>
-          <div class="feature">
-            <h3 class="feature__title">Clean Interface</h3>
-            <p class="feature__description">
-              Simple design, fast performance. Find your shows quickly and get back to watching without distractions.
-            </p>
-          </div>
-          <div class="feature">
-            <h3 class="feature__title">Chrome and Firefox</h3>
-            <p class="feature__description">
-              Install on your preferred browser. Both versions are kept up to date and work the same way.
-            </p>
-          </div>
-          <div class="feature">
-            <h3 class="feature__title">No Account Required</h3>
-            <p class="feature__description">
-              No signup, no email, no password. Install it and start using it immediately.
-            </p>
-          </div>
-          <div class="feature">
-            <h3 class="feature__title">No Ads or Tracking</h3>
-            <p class="feature__description">Zero ads. Zero analytics. We don't collect data or track what you watch.</p>
-          </div>
+          {
+            features.map((feature) => (
+              <div class="feature">
+                <h3 class="feature__title">{feature.title}</h3>
+                <p class="feature__description">{feature.description}</p>
+              </div>
+            ))
+          }
         </div>
       </section>
 
-      <section class="how-it-works">
-        <h2 class="how-it-works__title">How It Works</h2>
-        <p class="how-it-works__description">
-          Install the extension, click the Seenit icon <img
-            src="/icon.png"
-            alt="Seenit icon"
-            class="inline-icon"
-            loading="lazy"
-          /> in your toolbar, and add the TV series you're watching. Mark episodes as you go - your progress is saved automatically.
-        </p>
+      <section class="steps">
+        <h2 class="steps__title">Up and running in seconds</h2>
+        <div class="steps__grid">
+          {
+            steps.map((step) => (
+              <div class="step">
+                <span class="step__number">{step.number}</span>
+                <h3 class="step__title">{step.title}</h3>
+                <p class="step__description">{step.description}</p>
+              </div>
+            ))
+          }
+        </div>
       </section>
+
     </main>
 
     <footer class="footer">
-      <a href="/privacy" class="footer__link">Privacy Policy</a>
-      <p class="footer__copyright">©Seenit! - {currentYear}</p>
+      <div class="footer__links">
+        <a href="/privacy" class="footer__link">Privacy Policy</a>
+        <span class="footer__sep">·</span>
+        <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" class="footer__link">GitHub</a>
+        <span class="footer__sep">·</span>
+        <a
+          href="https://www.linkedin.com/in/alexander-kislov/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="footer__link">LinkedIn</a
+        >
+      </div>
+      <p class="footer__copyright">© Seenit! - {currentYear}</p>
     </footer>
   </div>
 </Layout>
 
 <style>
-  .footer__link {
+  .hero__badge {
     display: inline-block;
+    padding: 0.4rem 0.9rem;
+    margin-bottom: 1.5rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+  }
+
+  body.dark-theme .hero__badge {
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .button--secondary {
+    background-color: var(--bg-surface);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+  }
+
+  body.dark-theme .button--secondary {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  body.light-theme .button--secondary {
+    background-color: var(--bg-secondary);
+    border-color: #cbd5e1;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
+  }
+
+  .button--secondary:hover {
+    color: var(--text-primary);
+    transform: translateY(-2px);
+    border-color: var(--accent-blue);
+  }
+
+  .hero__note {
+    margin-top: 1.25rem;
+    font-size: 0.9rem;
+    color: var(--text-tertiary);
+  }
+
+  body.light-theme .hero__note {
+    color: var(--text-secondary);
+  }
+
+  /* Steps */
+  .steps {
+    padding: 4rem 2rem;
+    background-color: var(--bg-primary);
+  }
+
+  .steps__title {
+    font-family: 'Poppins', system-ui, sans-serif;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    background: linear-gradient(90deg, var(--gradient-blue), var(--gradient-purple), var(--gradient-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .steps__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .step {
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .step__number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: 1.25rem;
+    border-radius: 50%;
+    font-family: 'Poppins', system-ui, sans-serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: white;
+    background: linear-gradient(135deg, var(--gradient-blue), var(--gradient-purple));
+    box-shadow: 0 6px 16px rgba(var(--accent-blue-rgb), 0.35);
+  }
+
+  .step__title {
+    font-family: 'Poppins', system-ui, sans-serif;
+    font-size: 1.25rem;
     margin-bottom: 0.5rem;
+    color: var(--text-primary);
+  }
+
+  .step__description {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    max-width: 30ch;
+    margin: 0 auto;
+  }
+
+  .footer__links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .footer__link {
     color: var(--text-secondary);
     text-decoration: none;
     transition: color 0.2s ease;
@@ -136,5 +285,19 @@ const currentYear = new Date().getFullYear();
 
   .footer__link:hover {
     color: var(--accent-blue);
+  }
+
+  .footer__sep {
+    color: var(--text-tertiary);
+  }
+
+  @media (max-width: 768px) {
+    .steps__title {
+      font-size: 2rem;
+    }
+
+    .steps {
+      padding: 3rem 1.5rem;
+    }
   }
 </style>

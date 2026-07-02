@@ -86,11 +86,11 @@ const fullImageURL = new URL(image, siteURL).href;
     />
     <meta
       property="og:image:width"
-      content="1200"
+      content="1280"
     />
     <meta
       property="og:image:height"
-      content="630"
+      content="800"
     />
     <meta
       property="og:site_name"
@@ -352,14 +352,28 @@ const fullImageURL = new URL(image, siteURL).href;
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .logo:hover {
+    opacity: 0.85;
+  }
+
+  .logo__mark {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: block;
+    transition: transform 0.2s ease;
+  }
+
+  .logo:hover .logo__mark {
+    transform: scale(1.06) rotate(-3deg);
   }
 
   .logo__text {
-    background: linear-gradient(90deg, var(--gradient-blue), var(--gradient-purple), var(--gradient-pink));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    cursor: default;
+    color: var(--accent-blue);
   }
 
   /* Theme Toggle Block */

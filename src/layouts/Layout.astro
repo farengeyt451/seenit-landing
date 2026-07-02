@@ -204,6 +204,16 @@ const fullImageURL = new URL(image, siteURL).href;
     />
   </head>
   <body class="dark-theme">
+    <script is:inline>
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme');
+          var theme = stored === 'light' || stored === 'dark' ? stored : 'dark';
+          document.body.classList.remove('light-theme', 'dark-theme');
+          document.body.classList.add(theme + '-theme');
+        } catch (e) {}
+      })();
+    </script>
     <slot />
   </body>
 </html>

@@ -60,6 +60,25 @@ const steps = [
     description: 'Tap episodes as you finish them. Progress saves automatically - and syncs, if you want it to.',
   },
 ];
+
+const syncPoints = [
+  {
+    title: 'Backup in your own Drive',
+    description: 'Your watch history is stored in your personal Google Drive - not on our servers. You stay in control.',
+  },
+  {
+    title: 'Sync across devices',
+    description: 'Mark an episode on your laptop and see it on your desktop. Progress follows you everywhere you sign in.',
+  },
+  {
+    title: 'Conflict-free merging',
+    description: 'Watched on two machines while offline? Changes merge cleanly so nothing gets lost or overwritten.',
+  },
+  {
+    title: 'Opt-in and reversible',
+    description: 'Sync is off until you connect it, and you can disconnect at any time. Local-first stays the default.',
+  },
+];
 ---
 
 <Layout>
@@ -151,6 +170,66 @@ const steps = [
               </div>
             ))
           }
+        </div>
+      </section>
+
+      <section class="sync" id="sync">
+        <div class="sync__inner">
+          <div class="sync__content">
+            <span class="sync__badge">
+              <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="currentColor">
+                <path
+                  d="M19.35 10.04A7.49 7.49 0 0 0 12 4C9.11 4 6.6 5.64 5.35 8.04A5.994 5.994 0 0 0 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"
+                ></path>
+              </svg>
+              Cloud sync · Chrome
+            </span>
+            <h2 class="sync__title">Google&nbsp;Drive sync, on your terms</h2>
+            <p class="sync__description">
+              Connect your Google account on Chrome to back up your library and keep every device in step.
+              It is completely optional - Seenit! works fully offline without it.
+            </p>
+            <ul class="sync__list">
+              {
+                syncPoints.map((point) => (
+                  <li class="sync__item">
+                    <span class="sync__check" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 6 9 17l-5-5" />
+                      </svg>
+                    </span>
+                    <span class="sync__item-text">
+                      <strong class="sync__item-title">{point.title}</strong>
+                      <span class="sync__item-desc">{point.description}</span>
+                    </span>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+
+          <div class="sync__visual" aria-hidden="true">
+            <div class="sync__card sync__card--device">
+              <span class="sync__card-label">This device</span>
+              <span class="sync__card-status sync__card-status--ok">In sync</span>
+            </div>
+            <div class="sync__drive">
+              <svg viewBox="0 0 87.3 78" width="48" height="48" aria-hidden="true">
+                <path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8h-27.5c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/>
+                <path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44a9.06 9.06 0 0 0 -1.2 4.5h27.5z" fill="#00ac47"/>
+                <path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.502l5.852 11.5z" fill="#ea4335"/>
+                <path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z" fill="#00832d"/>
+                <path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684fc"/>
+                <path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00"/>
+              </svg>
+              <span class="sync__drive-label">Google Drive</span>
+              <span class="sync__drive-sub">Your backup</span>
+            </div>
+            <div class="sync__card sync__card--device">
+              <span class="sync__card-label">Other device</span>
+              <span class="sync__card-status sync__card-status--ok">In sync</span>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -306,6 +385,194 @@ const steps = [
     color: var(--text-tertiary);
   }
 
+  /* Google Drive Sync */
+  .sync {
+    padding: 4rem 2rem;
+    background-color: var(--bg-secondary);
+  }
+
+  .sync__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 3.5rem;
+    align-items: center;
+  }
+
+  .sync__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.4rem 0.9rem;
+    margin-bottom: 1.25rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent-blue);
+    background-color: rgba(var(--accent-blue-rgb), 0.12);
+    border: 1px solid rgba(var(--accent-blue-rgb), 0.25);
+  }
+
+  .sync__title {
+    font-family: 'Poppins', system-ui, sans-serif;
+    font-size: 2.5rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    background: linear-gradient(90deg, var(--gradient-blue), var(--gradient-purple), var(--gradient-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .sync__description {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    max-width: 46ch;
+  }
+
+  .sync__list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 0;
+    margin: 0;
+  }
+
+  .sync__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+  }
+
+  .sync__check {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.6rem;
+    height: 1.6rem;
+    margin-top: 0.15rem;
+    border-radius: 50%;
+    color: white;
+    background: linear-gradient(135deg, var(--gradient-blue), var(--gradient-purple));
+    box-shadow: 0 4px 10px rgba(var(--accent-blue-rgb), 0.3);
+  }
+
+  .sync__item-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .sync__item-title {
+    font-family: 'Poppins', system-ui, sans-serif;
+    font-size: 1.05rem;
+    color: var(--text-primary);
+  }
+
+  .sync__item-desc {
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* Sync visual */
+  .sync__visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .sync__card,
+  .sync__drive {
+    width: 100%;
+    max-width: 340px;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-primary);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  }
+
+  body.dark-theme .sync__card,
+  body.dark-theme .sync__drive {
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .sync__card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+  }
+
+  .sync__card-label {
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .sync__card-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #16a34a;
+  }
+
+  .sync__card-status--ok::before {
+    content: '';
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    background-color: #22c55e;
+    box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.18);
+  }
+
+  .sync__drive {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 1.75rem 1.25rem;
+    text-align: center;
+    position: relative;
+  }
+
+  .sync__drive::before,
+  .sync__drive::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    width: 2px;
+    height: 1rem;
+    background: linear-gradient(var(--gradient-blue), var(--gradient-purple));
+    transform: translateX(-50%);
+    opacity: 0.5;
+  }
+
+  .sync__drive::before {
+    top: -1rem;
+  }
+
+  .sync__drive::after {
+    bottom: -1rem;
+  }
+
+  .sync__drive-label {
+    font-family: 'Poppins', system-ui, sans-serif;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .sync__drive-sub {
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+  }
+
   @media (max-width: 768px) {
     .steps__title {
       font-size: 2rem;
@@ -313,6 +580,23 @@ const steps = [
 
     .steps {
       padding: 3rem 1.5rem;
+    }
+
+    .sync {
+      padding: 3rem 1.5rem;
+    }
+
+    .sync__inner {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .sync__title {
+      font-size: 2rem;
+    }
+
+    .sync__visual {
+      order: -1;
     }
   }
 </style>

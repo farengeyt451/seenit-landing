@@ -3,13 +3,15 @@ interface Props {
   title?: string;
   description?: string;
   image?: string;
+  imageAlt?: string;
   canonicalURL?: string;
 }
 
 const {
-  title = 'Seenit! - TV Series Episode Tracker | Chrome and Firefox Extension',
-  description = 'Free browser extension to track TV series. Mark episodes as watched, pick up where you left off. Available for Chrome and Firefox.',
+  title = 'Seenit! - TV Episode Tracker & Watchlist Companion for Chrome & Firefox',
+  description = 'Seenit! is a free, private episode tracker and TV series companion for Chrome and Firefox. Mark episodes as watched, track every show, and pick up right where you left off.',
   image = '/og-image.png',
+  imageAlt = 'Seenit! - TV episode tracker browser extension shown in light and dark mode',
   canonicalURL = Astro.url.href,
 } = Astro.props;
 
@@ -38,7 +40,7 @@ const fullImageURL = new URL(image, siteURL).href;
     />
     <meta
       name="keywords"
-      content="TV series tracker, episode tracker, Chrome extension, Firefox addon, watch tracker, TV show manager, series organizer, binge watching, episode manager, streaming tracker, show progress, watched episodes"
+      content="episode tracker, TV episode tracker, TV series tracker, TV companion, episode tracker companion, watchlist companion, TV show tracker, Chrome extension, Firefox addon, watch tracker, series organizer, binge watching, episode manager, show progress, watched episodes, next episode to watch"
     />
     <meta
       name="author"
@@ -85,12 +87,20 @@ const fullImageURL = new URL(image, siteURL).href;
       content={fullImageURL}
     />
     <meta
+      property="og:image:type"
+      content="image/png"
+    />
+    <meta
       property="og:image:width"
       content="1280"
     />
     <meta
       property="og:image:height"
       content="800"
+    />
+    <meta
+      property="og:image:alt"
+      content={imageAlt}
     />
     <meta
       property="og:site_name"
@@ -122,6 +132,10 @@ const fullImageURL = new URL(image, siteURL).href;
       name="twitter:image"
       content={fullImageURL}
     />
+    <meta
+      name="twitter:image:alt"
+      content={imageAlt}
+    />
 
     <!-- Favicon -->
     <link
@@ -132,13 +146,18 @@ const fullImageURL = new URL(image, siteURL).href;
     />
     <link
       rel="icon"
-      type="image/svg+xml"
-      href="/favicon.svg"
+      type="image/png"
+      sizes="128x128"
+      href="/icon-128.png"
     />
     <link
       rel="apple-touch-icon"
       sizes="180x180"
       href="/apple-touch-icon.png"
+    />
+    <link
+      rel="manifest"
+      href="/site.webmanifest"
     />
 
     <!-- Generator -->
@@ -182,24 +201,28 @@ const fullImageURL = new URL(image, siteURL).href;
         '@context': 'https://schema.org',
         '@type': 'SoftwareApplication',
         name: 'Seenit! Episode Tracker',
+        alternateName: 'Seenit! TV Companion',
         description: description,
         applicationCategory: 'BrowserApplication',
         operatingSystem: 'Chrome, Firefox',
+        url: siteURL.href,
+        image: fullImageURL,
+        featureList: [
+          'Track watched TV episodes',
+          'Per-season progress tracking',
+          'Search and organize TV series',
+          'Optional Google Drive cloud sync',
+          'Private, local-first storage',
+        ],
         offers: {
           '@type': 'Offer',
           price: '0',
           priceCurrency: 'USD',
         },
-        aggregateRating: {
-          '@type': 'AggregateRating',
-          ratingValue: '5',
-          ratingCount: '100',
-        },
         author: {
           '@type': 'Person',
           name: 'Alexander Kislov',
         },
-        url: canonicalURL,
       })}
     />
   </head>

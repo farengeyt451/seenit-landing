@@ -63,6 +63,40 @@ const steps = [
   },
 ];
 
+const faqs = [
+  {
+    question: 'What is Seenit!?',
+    answer:
+      'Seenit! is a free browser extension and TV companion that tracks which episodes of a series you have watched, so you always know what to watch next.',
+  },
+  {
+    question: 'Is Seenit! free?',
+    answer: 'Yes. Seenit! is completely free, with no account required, no ads and no tracking.',
+  },
+  {
+    question: 'Which browsers does Seenit! support?',
+    answer: 'Seenit! is available as an extension for Google Chrome and as an add-on for Mozilla Firefox.',
+  },
+  {
+    question: 'Does Seenit! sync across devices?',
+    answer:
+      'Optionally. On Chrome you can connect your own Google Drive to back up and sync your watch history across devices. Sync is off by default and Seenit! works fully offline.',
+  },
+];
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.answer,
+    },
+  })),
+};
+
 const syncPoints = [
   {
     title: 'Backup in your own Drive',
@@ -84,6 +118,7 @@ const syncPoints = [
 ---
 
 <Layout>
+  <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
   <div class="page">
     <header class="header">
       <a href="/" class="logo" aria-label="Seenit! home">
@@ -119,7 +154,7 @@ const syncPoints = [
         <h1 class="hero__title">Your shows, perfectly tracked</h1>
         <p class="hero__description">
           Mark what you've watched, see every series at a glance, and pick up right where you left off.
-          A private, local-first episode tracker that lives in your browser.
+          A private, local-first episode tracker and TV companion that lives in your browser.
         </p>
         <div class="hero__wrapper">
           <a href={CHROME_URL} target="_blank" rel="noopener noreferrer" class="button button--primary"
@@ -245,6 +280,20 @@ const syncPoints = [
               <span class="sync__card-status sync__card-status--ok">In sync</span>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section class="faq" id="faq">
+        <h2 class="faq__title">Frequently asked questions</h2>
+        <div class="faq__grid">
+          {
+            faqs.map((faq) => (
+              <details class="faq__item">
+                <summary class="faq__question">{faq.question}</summary>
+                <p class="faq__answer">{faq.answer}</p>
+              </details>
+            ))
+          }
         </div>
       </section>
 
@@ -588,9 +637,87 @@ const syncPoints = [
     color: var(--text-tertiary);
   }
 
+  /* FAQ */
+  .faq {
+    padding: 4rem 2rem;
+    background-color: var(--bg-primary);
+  }
+
+  .faq__title {
+    font-family: 'Poppins', system-ui, sans-serif;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    background: linear-gradient(90deg, var(--gradient-blue), var(--gradient-purple), var(--gradient-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .faq__grid {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .faq__item {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+  }
+
+  body.dark-theme .faq__item {
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .faq__question {
+    font-family: 'Poppins', system-ui, sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .faq__question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq__question::after {
+    content: '+';
+    font-size: 1.5rem;
+    color: var(--accent-blue);
+    transition: transform 0.2s ease;
+  }
+
+  .faq__item[open] .faq__question::after {
+    transform: rotate(45deg);
+  }
+
+  .faq__answer {
+    margin-top: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
   @media (max-width: 768px) {
     .steps__title {
       font-size: 2rem;
+    }
+
+    .faq__title {
+      font-size: 2rem;
+    }
+
+    .faq {
+      padding: 3rem 1.5rem;
     }
 
     .steps {

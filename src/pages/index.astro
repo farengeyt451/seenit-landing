@@ -128,26 +128,22 @@ const parallaxIcons = {
 };
 
 const parallaxItems = [
-  { icon: 'check', pos: 'top: 12%; left: 8%;', depth: 0.45, scroll: 0.06, size: 30, rot: -15, tone: 'green' },
-  { icon: 'star', pos: 'top: 21%; left: 18%;', depth: 0.24, scroll: 0.04, size: 18, rot: 10, tone: 'pink' },
-  { icon: 'square', pos: 'top: 9%; left: 30%;', depth: 0.17, scroll: 0.03, size: 16, rot: -20, tone: 'purple' },
-  { icon: 'play', pos: 'top: 15%; left: 71%;', depth: 0.36, scroll: 0.05, size: 22, rot: 12, tone: 'blue' },
-  { icon: 'check', pos: 'top: 8%; left: 86%;', depth: 0.55, scroll: 0.08, size: 34, rot: -10, tone: 'green' },
-  { icon: 'eye', pos: 'top: 24%; left: 92%;', depth: 0.3, scroll: 0.05, size: 24, rot: 8, tone: 'blue' },
-  { icon: 'bookmark', pos: 'top: 30%; left: 4%;', depth: 0.28, scroll: 0.04, size: 20, rot: -12, tone: 'pink' },
-  { icon: 'star', pos: 'top: 41%; left: 12%;', depth: 0.2, scroll: 0.03, size: 16, rot: 15, tone: 'pink' },
-  { icon: 'play', pos: 'top: 53%; left: 6%;', depth: 0.4, scroll: 0.06, size: 26, rot: -8, tone: 'blue' },
-  { icon: 'square', pos: 'top: 65%; left: 14%;', depth: 0.22, scroll: 0.04, size: 18, rot: 20, tone: 'purple' },
-  { icon: 'check', pos: 'top: 79%; left: 8%;', depth: 0.5, scroll: 0.07, size: 32, rot: -14, tone: 'green' },
-  { icon: 'eye', pos: 'top: 88%; left: 22%;', depth: 0.3, scroll: 0.05, size: 22, rot: 10, tone: 'blue' },
-  { icon: 'star', pos: 'top: 82%; left: 35%;', depth: 0.18, scroll: 0.03, size: 16, rot: -18, tone: 'pink' },
-  { icon: 'bookmark', pos: 'top: 90%; left: 66%;', depth: 0.26, scroll: 0.05, size: 20, rot: 12, tone: 'pink' },
-  { icon: 'check', pos: 'top: 84%; left: 82%;', depth: 0.48, scroll: 0.07, size: 30, rot: -10, tone: 'green' },
-  { icon: 'square', pos: 'top: 71%; left: 90%;', depth: 0.24, scroll: 0.04, size: 18, rot: 16, tone: 'purple' },
-  { icon: 'play', pos: 'top: 58%; left: 94%;', depth: 0.36, scroll: 0.06, size: 24, rot: -12, tone: 'blue' },
-  { icon: 'star', pos: 'top: 46%; left: 88%;', depth: 0.28, scroll: 0.05, size: 20, rot: 9, tone: 'pink' },
-  { icon: 'check', pos: 'top: 34%; left: 80%;', depth: 0.42, scroll: 0.06, size: 28, rot: -16, tone: 'green' },
-  { icon: 'square', pos: 'top: 27%; left: 60%;', depth: 0.16, scroll: 0.03, size: 14, rot: 20, tone: 'purple' },
+  // Above the content
+  { icon: 'check', pos: 'top: 6%; left: 40%;', depth: 0.35, scroll: 0.05, size: 24, rot: -12, tone: 'green' },
+  { icon: 'square', pos: 'top: 9%; left: 60%;', depth: 0.2, scroll: 0.03, size: 16, rot: 18, tone: 'purple' },
+  // Left flank, hugging the content
+  { icon: 'star', pos: 'top: 23%; left: 23%;', depth: 0.3, scroll: 0.05, size: 18, rot: 10, tone: 'pink' },
+  { icon: 'play', pos: 'top: 42%; left: 25%;', depth: 0.28, scroll: 0.05, size: 22, rot: -8, tone: 'blue' },
+  { icon: 'eye', pos: 'top: 60%; left: 22%;', depth: 0.34, scroll: 0.06, size: 22, rot: 8, tone: 'blue' },
+  { icon: 'check', pos: 'top: 76%; left: 28%;', depth: 0.24, scroll: 0.04, size: 20, rot: -14, tone: 'green' },
+  // Right flank, hugging the content
+  { icon: 'play', pos: 'top: 21%; left: 77%;', depth: 0.36, scroll: 0.05, size: 22, rot: 12, tone: 'blue' },
+  { icon: 'bookmark', pos: 'top: 39%; left: 75%;', depth: 0.26, scroll: 0.04, size: 20, rot: -12, tone: 'pink' },
+  { icon: 'star', pos: 'top: 57%; left: 79%;', depth: 0.3, scroll: 0.05, size: 18, rot: 9, tone: 'pink' },
+  { icon: 'check', pos: 'top: 73%; left: 74%;', depth: 0.4, scroll: 0.06, size: 26, rot: -10, tone: 'green' },
+  // Below the content
+  { icon: 'square', pos: 'top: 90%; left: 43%;', depth: 0.22, scroll: 0.03, size: 16, rot: 16, tone: 'purple' },
+  { icon: 'star', pos: 'top: 88%; left: 60%;', depth: 0.24, scroll: 0.05, size: 18, rot: -18, tone: 'pink' },
 ];
 ---
 
@@ -392,8 +388,9 @@ const parallaxItems = [
         for (const el of items) {
           const depth = parseFloat(el.dataset.depth || '0');
           const scrollDepth = parseFloat(el.dataset.scroll || '0');
-          const mx = curX * depth * MAX_SHIFT;
-          const my = curY * depth * MAX_SHIFT;
+          // Inverted input: layers move opposite to the cursor.
+          const mx = -curX * depth * MAX_SHIFT;
+          const my = -curY * depth * MAX_SHIFT;
           const sy = scrollY * scrollDepth;
           el.style.transform = `translate3d(${mx.toFixed(2)}px, ${(my + sy).toFixed(2)}px, 0)`;
         }

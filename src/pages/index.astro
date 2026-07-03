@@ -308,7 +308,9 @@ const parallaxItems = [
           <div class="sync__visual" aria-hidden="true">
             <div class="sync__card sync__card--device">
               <span class="sync__card-label">This device</span>
-              <span class="sync__card-status sync__card-status--ok">In sync</span>
+              <span class="sync__card-status sync__card-status--ok"
+                ><span class="sync__card-dot"></span>In sync</span
+              >
             </div>
             <div class="sync__drive">
               <svg viewBox="0 0 87.3 78" width="48" height="48" aria-hidden="true">
@@ -324,7 +326,9 @@ const parallaxItems = [
             </div>
             <div class="sync__card sync__card--device">
               <span class="sync__card-label">Other device</span>
-              <span class="sync__card-status sync__card-status--ok">In sync</span>
+              <span class="sync__card-status sync__card-status--ok"
+                ><span class="sync__card-dot"></span>In sync</span
+              >
             </div>
           </div>
         </div>
@@ -797,13 +801,45 @@ const parallaxItems = [
     color: #16a34a;
   }
 
-  .sync__card-status--ok::before {
-    content: '';
+  .sync__card-dot {
+    position: relative;
+    display: inline-flex;
     width: 0.55rem;
     height: 0.55rem;
+  }
+
+  .sync__card-dot::before {
+    content: '';
+    position: absolute;
+    inset: 0;
     border-radius: 50%;
     background-color: #22c55e;
-    box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.18);
+    opacity: 0.75;
+    animation: sync-ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+
+  .sync__card-dot::after {
+    content: '';
+    position: relative;
+    display: inline-flex;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #22c55e;
+  }
+
+  @keyframes sync-ping {
+    75%,
+    100% {
+      transform: scale(2.2);
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sync__card-dot::before {
+      animation: none;
+    }
   }
 
   .sync__drive {

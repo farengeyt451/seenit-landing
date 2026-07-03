@@ -115,6 +115,40 @@ const syncPoints = [
     description: 'Sync is off until you connect it, and you can disconnect at any time. Local-first stays the default.',
   },
 ];
+
+// Themed parallax icons for the hero (scene). Each item is a "layer" with a
+// data-depth (mouse sensitivity) and data-scroll (scroll sensitivity).
+const parallaxIcons = {
+  check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>',
+  play: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>',
+  star: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.6-5.2 4.6 1.6 6.8L12 17.8 5.8 20.9l1.6-6.8L2.2 8.9l6.9-.6z"/></svg>',
+  square: '<svg viewBox="0 0 24 24" fill="currentColor"><rect x="4" y="4" width="16" height="16" rx="4"/></svg>',
+  eye: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>',
+  bookmark: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 2h12a2 2 0 0 1 2 2v18l-8-4-8 4V4a2 2 0 0 1 2-2z"/></svg>',
+};
+
+const parallaxItems = [
+  { icon: 'check', pos: 'top: 12%; left: 8%;', depth: 0.45, scroll: 0.06, size: 30, rot: -15, tone: 'green' },
+  { icon: 'star', pos: 'top: 21%; left: 18%;', depth: 0.24, scroll: 0.04, size: 18, rot: 10, tone: 'pink' },
+  { icon: 'square', pos: 'top: 9%; left: 30%;', depth: 0.17, scroll: 0.03, size: 16, rot: -20, tone: 'purple' },
+  { icon: 'play', pos: 'top: 15%; left: 71%;', depth: 0.36, scroll: 0.05, size: 22, rot: 12, tone: 'blue' },
+  { icon: 'check', pos: 'top: 8%; left: 86%;', depth: 0.55, scroll: 0.08, size: 34, rot: -10, tone: 'green' },
+  { icon: 'eye', pos: 'top: 24%; left: 92%;', depth: 0.3, scroll: 0.05, size: 24, rot: 8, tone: 'blue' },
+  { icon: 'bookmark', pos: 'top: 30%; left: 4%;', depth: 0.28, scroll: 0.04, size: 20, rot: -12, tone: 'pink' },
+  { icon: 'star', pos: 'top: 41%; left: 12%;', depth: 0.2, scroll: 0.03, size: 16, rot: 15, tone: 'pink' },
+  { icon: 'play', pos: 'top: 53%; left: 6%;', depth: 0.4, scroll: 0.06, size: 26, rot: -8, tone: 'blue' },
+  { icon: 'square', pos: 'top: 65%; left: 14%;', depth: 0.22, scroll: 0.04, size: 18, rot: 20, tone: 'purple' },
+  { icon: 'check', pos: 'top: 79%; left: 8%;', depth: 0.5, scroll: 0.07, size: 32, rot: -14, tone: 'green' },
+  { icon: 'eye', pos: 'top: 88%; left: 22%;', depth: 0.3, scroll: 0.05, size: 22, rot: 10, tone: 'blue' },
+  { icon: 'star', pos: 'top: 82%; left: 35%;', depth: 0.18, scroll: 0.03, size: 16, rot: -18, tone: 'pink' },
+  { icon: 'bookmark', pos: 'top: 90%; left: 66%;', depth: 0.26, scroll: 0.05, size: 20, rot: 12, tone: 'pink' },
+  { icon: 'check', pos: 'top: 84%; left: 82%;', depth: 0.48, scroll: 0.07, size: 30, rot: -10, tone: 'green' },
+  { icon: 'square', pos: 'top: 71%; left: 90%;', depth: 0.24, scroll: 0.04, size: 18, rot: 16, tone: 'purple' },
+  { icon: 'play', pos: 'top: 58%; left: 94%;', depth: 0.36, scroll: 0.06, size: 24, rot: -12, tone: 'blue' },
+  { icon: 'star', pos: 'top: 46%; left: 88%;', depth: 0.28, scroll: 0.05, size: 20, rot: 9, tone: 'pink' },
+  { icon: 'check', pos: 'top: 34%; left: 80%;', depth: 0.42, scroll: 0.06, size: 28, rot: -16, tone: 'green' },
+  { icon: 'square', pos: 'top: 27%; left: 60%;', depth: 0.16, scroll: 0.03, size: 14, rot: 20, tone: 'purple' },
+];
 ---
 
 <Layout>
@@ -149,7 +183,25 @@ const syncPoints = [
     </header>
 
     <main class="main">
-      <section class="hero">
+      <section class="hero" data-parallax-scene>
+        <div class="parallax" aria-hidden="true">
+          {
+            parallaxItems.map((item) => (
+              <span
+                class="parallax__item"
+                data-depth={item.depth}
+                data-scroll={item.scroll}
+                style={item.pos}
+              >
+                <span
+                  class={`parallax__inner parallax__inner--${item.tone}`}
+                  style={`width: ${item.size}px; height: ${item.size}px; --rot: ${item.rot}deg;`}
+                  set:html={parallaxIcons[item.icon as keyof typeof parallaxIcons]}
+                />
+              </span>
+            ))
+          }
+        </div>
         <span class="hero__badge">Free browser extension · Chrome &amp; Firefox</span>
         <h1 class="hero__title">Your shows, perfectly tracked</h1>
         <p class="hero__description">
@@ -164,7 +216,6 @@ const syncPoints = [
             >Add to Firefox</a
           >
         </div>
-        <p class="hero__note">No account · No ads · No tracking</p>
       </section>
 
       <div class="preview">
@@ -315,9 +366,171 @@ const syncPoints = [
       <p class="footer__copyright">© Seenit! - {currentYear}</p>
     </footer>
   </div>
+
+  <script>
+    const scene = document.querySelector<HTMLElement>('[data-parallax-scene]');
+    const items = scene
+      ? Array.from(scene.querySelectorAll<HTMLElement>('.parallax__item'))
+      : [];
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (scene && items.length && !prefersReduced) {
+      const MAX_SHIFT = 45; // px of travel at depth 1 for full cursor swing
+      const FRICTION = 0.08; // easing toward the target (like parallax.js friction)
+
+      let targetX = 0;
+      let targetY = 0;
+      let curX = 0;
+      let curY = 0;
+      let scrollY = window.scrollY;
+      let running = false;
+
+      const render = () => {
+        curX += (targetX - curX) * FRICTION;
+        curY += (targetY - curY) * FRICTION;
+
+        for (const el of items) {
+          const depth = parseFloat(el.dataset.depth || '0');
+          const scrollDepth = parseFloat(el.dataset.scroll || '0');
+          const mx = curX * depth * MAX_SHIFT;
+          const my = curY * depth * MAX_SHIFT;
+          const sy = scrollY * scrollDepth;
+          el.style.transform = `translate3d(${mx.toFixed(2)}px, ${(my + sy).toFixed(2)}px, 0)`;
+        }
+
+        // Keep animating while the cursor is still settling or we keep scrolling.
+        if (Math.abs(targetX - curX) > 0.0005 || Math.abs(targetY - curY) > 0.0005) {
+          requestAnimationFrame(render);
+        } else {
+          running = false;
+        }
+      };
+
+      const kick = () => {
+        if (!running) {
+          running = true;
+          requestAnimationFrame(render);
+        }
+      };
+
+      window.addEventListener(
+        'pointermove',
+        (e) => {
+          const cx = window.innerWidth / 2;
+          const cy = window.innerHeight / 2;
+          targetX = (e.clientX - cx) / cx; // -1 .. 1
+          targetY = (e.clientY - cy) / cy; // -1 .. 1
+          kick();
+        },
+        { passive: true }
+      );
+
+      window.addEventListener(
+        'scroll',
+        () => {
+          scrollY = window.scrollY;
+          kick();
+        },
+        { passive: true }
+      );
+
+      render();
+    }
+  </script>
 </Layout>
 
 <style>
+  /* Parallax scene (hero only) */
+  .hero {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero > *:not(.parallax) {
+    position: relative;
+    z-index: 1;
+  }
+
+  .parallax {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+  }
+
+  .parallax__item {
+    position: absolute;
+    will-change: transform;
+  }
+
+  .parallax__inner {
+    display: block;
+    opacity: 0.6;
+    transform: rotate(var(--rot, 0deg));
+    animation: pxFloat 7s ease-in-out infinite alternate;
+  }
+
+  .parallax__inner :global(svg) {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .parallax__inner--green {
+    color: #22c55e;
+  }
+  .parallax__inner--blue {
+    color: var(--gradient-blue);
+  }
+  .parallax__inner--purple {
+    color: var(--gradient-purple);
+  }
+  .parallax__inner--pink {
+    color: var(--gradient-pink);
+  }
+
+  body.light-theme .parallax__inner {
+    opacity: 0.5;
+  }
+
+  .parallax__item:nth-child(odd) .parallax__inner {
+    animation-duration: 8.5s;
+  }
+  .parallax__item:nth-child(3n) .parallax__inner {
+    animation-duration: 9.5s;
+    animation-delay: -3s;
+  }
+  .parallax__item:nth-child(4n) .parallax__inner {
+    animation-duration: 6.5s;
+    animation-delay: -1.5s;
+  }
+  .parallax__item:nth-child(5n) .parallax__inner {
+    animation-duration: 10.5s;
+    animation-delay: -4.5s;
+  }
+
+  @keyframes pxFloat {
+    from {
+      transform: rotate(calc(var(--rot, 0deg) - 4deg)) translateY(0);
+    }
+    to {
+      transform: rotate(calc(var(--rot, 0deg) + 4deg)) translateY(-8px);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .parallax {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .parallax__inner {
+      animation: none;
+    }
+  }
+
   .hero__badge {
     display: inline-block;
     padding: 0.4rem 0.9rem;

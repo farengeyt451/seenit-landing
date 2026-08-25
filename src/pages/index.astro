@@ -78,6 +78,11 @@ const faqs = [
     answer: 'Seenit! is available as an extension for Google Chrome and as an add-on for Mozilla Firefox.',
   },
   {
+    question: 'What does the Chrome Web Store Featured badge mean?',
+    answer:
+      'The Featured badge is awarded by Google to extensions that follow technical best practices, respect user privacy, and deliver a great user experience. Seenit! earned it - so you can install with confidence.',
+  },
+  {
     question: 'Does Seenit! sync across devices?',
     answer:
       'Optionally. On Chrome you can connect your own Google Drive to back up and sync your watch history across devices. Sync is off by default and Seenit! works fully offline.',
@@ -198,7 +203,17 @@ const parallaxItems = [
             ))
           }
         </div>
-        <span class="hero__badge">Free browser extension · Chrome &amp; Firefox</span>
+        <span class="hero__badge">
+          <span class="hero__badge-medal" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+              <path
+                d="M20 10c0-4.42-3.58-8-8-8s-8 3.58-8 8c0 2.03.76 3.87 2 5.28V23l6-2 6 2v-7.72c1.24-1.41 2-3.25 2-5.28zm-8-6c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6 2.69-6 6-6zm0 15-4 1.02v-3.1c1.18.68 2.54 1.08 4 1.08s2.82-.4 4-1.08v3.1L12 19zm-3-9c0-1.66 1.34-3 3-3s3 1.34 3 3-1.34 3-3 3-3-1.34-3-3z"
+              ></path>
+            </svg>
+          </span>
+          <span class="hero__badge-text"><strong>Featured</strong> on the Chrome Web Store</span
+          >
+        </span>
         <h1 class="hero__title">Your shows, perfectly tracked</h1>
         <p class="hero__description">
           Mark what you've watched, see every series at a glance, and pick up right where you left off.
@@ -535,19 +550,74 @@ const parallaxItems = [
   }
 
   .hero__badge {
-    display: inline-block;
-    padding: 0.4rem 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.4rem 1.1rem 0.4rem 0.4rem;
     margin-bottom: 1.5rem;
     border-radius: 999px;
-    font-size: 0.85rem;
-    font-weight: 600;
+    font-size: 0.92rem;
+    font-weight: 500;
     color: var(--text-secondary);
-    background-color: var(--bg-secondary);
-    border: 1px solid var(--border-color);
+    border: 1px solid transparent;
+    background:
+      linear-gradient(var(--bg-secondary), var(--bg-secondary)) padding-box,
+      linear-gradient(120deg, #34a853, var(--gradient-blue), var(--gradient-purple)) border-box;
+    box-shadow: 0 6px 20px rgba(52, 168, 83, 0.14);
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
   }
 
-  body.dark-theme .hero__badge {
-    border-color: rgba(255, 255, 255, 0.08);
+  .hero__badge:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 26px rgba(52, 168, 83, 0.22);
+  }
+
+  .hero__badge-medal {
+    position: relative;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.1rem;
+    height: 2.1rem;
+    border-radius: 50%;
+    color: #fff;
+    background: linear-gradient(135deg, #34a853, #1e8e3e);
+    box-shadow: 0 3px 10px rgba(52, 168, 83, 0.45);
+  }
+
+  .hero__badge-medal::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 rgba(52, 168, 83, 0.5);
+    animation: badgePulse 2.6s ease-out infinite;
+  }
+
+  @keyframes badgePulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(52, 168, 83, 0.45);
+    }
+    70% {
+      box-shadow: 0 0 0 9px rgba(52, 168, 83, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(52, 168, 83, 0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__badge-medal::before {
+      animation: none;
+    }
+  }
+
+  .hero__badge-text strong {
+    font-weight: 700;
+    color: var(--text-primary);
   }
 
   .button--secondary {

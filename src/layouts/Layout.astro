@@ -9,7 +9,7 @@ interface Props {
 
 const {
   title = 'Seenit! - TV Episode Tracker & Watchlist Companion for Chrome & Firefox',
-  description = 'Seenit! is a free, private episode tracker and TV series companion for Chrome and Firefox. Mark episodes as watched, track every show, and pick up right where you left off.',
+  description = 'Seenit! is a free, private episode tracker and TV series companion for Chrome and Firefox, Featured on the Chrome Web Store. Mark episodes as watched, track every show, and pick up right where you left off.',
   image = '/og-image.png',
   imageAlt = 'Seenit! - TV episode tracker browser extension shown in light and dark mode',
   canonicalURL = Astro.url.href,
@@ -40,7 +40,7 @@ const fullImageURL = new URL(image, siteURL).href;
     />
     <meta
       name="keywords"
-      content="episode tracker, TV episode tracker, TV series tracker, TV companion, episode tracker companion, watchlist companion, TV show tracker, Chrome extension, Firefox addon, watch tracker, series organizer, binge watching, episode manager, show progress, watched episodes, next episode to watch"
+      content="episode tracker, TV episode tracker, TV series tracker, TV companion, episode tracker companion, watchlist companion, TV show tracker, Chrome extension, Firefox addon, featured Chrome extension, watch tracker, series organizer, binge watching, episode manager, show progress, watched episodes, next episode to watch"
     />
     <meta
       name="author"
@@ -207,6 +207,7 @@ const fullImageURL = new URL(image, siteURL).href;
         operatingSystem: 'Chrome, Firefox',
         url: siteURL.href,
         image: fullImageURL,
+        award: 'Featured on the Chrome Web Store',
         featureList: [
           'Track watched TV episodes',
           'Per-season progress tracking',

@@ -1,32 +1,21 @@
-## Project Structure
+## Seenit! Episode Tracker
 
-Inside of your Astro project, you'll see the following folders and files:
+Never lose your place in a TV series again. Seenit! is a free browser extension that lets you track watched episodes, manage your shows, and always know what to watch next.
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
+[Install Seenit! for the Chrome](https://chromewebstore.google.com/detail/seenit-episode-tracker/amopmnmnaimidbcfnjbnlfagmlmdhlch)
 
-## Commands
+[Install Seenit! for the Firefox](https://addons.mozilla.org/ru/firefox/addon/seenit-episode-tracker/)
 
-All commands are run from the root of the project, from a terminal:
+### Why Seenit!?
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+- Mark episodes as watched with a click and see your progress for every season.
+- Search, add, favorite, filter, and reorder the shows in your personal watchlist.
+- Keep watch history private and local by default, with no account, ads, or tracking.
+- Optionally back up and sync progress through your own Google Drive on Chrome.
+- Use a clean, fast interface in either dark or light mode.
+
+This repository contains the landing page for the Seenit! Episode Tracker browser extension.
+
+<div align="center">
+  <img src="public/demo.png" alt="Demo image" width="100%" />
+</div>
